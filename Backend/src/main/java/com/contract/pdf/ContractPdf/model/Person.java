@@ -2,10 +2,7 @@ package com.contract.pdf.ContractPdf.model;
 
 import com.contract.pdf.ContractPdf.DTO.PersonRequestDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -29,7 +26,7 @@ public class Person {
     @Column(name = "email", nullable = false)
     private String email;
 
-    public Person(PersonRequestDTO data) {
+    public Person (PersonRequestDTO data) {
         this.name = data.name();
         this.cpfCnpj = data.cpfCnpj();
         this.email = data.email();

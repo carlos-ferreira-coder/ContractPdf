@@ -18,8 +18,8 @@ CREATE TABLE contract (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(2) NOT NULL,
     description TEXT NOT NULL,
-    request_id UUID NOT NULL,
-    CONSTRAINT fk_contract_request FOREIGN KEY (request_id)
+    contract_request_id UUID NOT NULL,
+    CONSTRAINT fk_contract_request FOREIGN KEY (contract_request_id)
             REFERENCES contract_request (id) ON DELETE CASCADE
 );
 
