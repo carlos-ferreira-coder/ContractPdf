@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("person")
@@ -19,6 +20,13 @@ public class PersonController {
     @GetMapping
     public List<PersonResponseDTO> getAll() {
         return personRepository.findAll().stream().map(PersonResponseDTO::new).toList();
+    }
+
+    @GetMapping("/{id}")
+    public PersonResponseDTO getPersonById (@PathVariable("id") UUID id) {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pessoa " + id + "não encontrada! "));
+        return new PersonResponseDTO(person);
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
