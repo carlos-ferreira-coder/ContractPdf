@@ -1,4 +1,4 @@
-CREATE SCHEMA contract_pdf;
+CREATE SCHEMA IF NOT EXISTS contract_pdf;
 SET search_path TO contract_pdf;
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -7,7 +7,7 @@ CREATE TABLE contract_request (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     status VARCHAR(50) NOT NULL,
-    pdf_path VARCHAR(255),
+    pdf_path VARCHAR(255)
 );
 
 CREATE TABLE contract (
