@@ -12,7 +12,7 @@
 	<artifactId>ContractPdf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ContractPdf</name>
-	<description>Aplicação onde o usuário preenche dados básicos para gerar um contrato em PDF e, em seguida, o contrato é enviado para assinatura via Clicksign. project for Spring Boot</description>
+	<description>Aplicação onde o usuário preenche dados básicos para gerar um contrato em PDF e, em seguida, o contrato é enviado para assinatura via Clicksign.</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -37,10 +37,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
@@ -70,11 +66,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
