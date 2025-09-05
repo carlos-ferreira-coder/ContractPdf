@@ -11,6 +11,14 @@ const signerSchema = z.object({
     }),
 
   cpfCnpj: z.string().regex(/^\d{11}$|^\d{14}$/, "Digite somente os numeros"),
+  /*
+  cpfCnpj: z
+    .string()
+    .regex(
+      /^(\d{3}\.\d{3}\.\d{3}-\d{2}|\d{11}|\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}|\d{14})$/,
+      "Digite no formato padrão"
+    ),
+  */
 
   email: z.email("Email inválido"),
 });

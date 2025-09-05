@@ -8,7 +8,6 @@ import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -49,7 +48,7 @@ public class ClicksignService {
                     }
                   }
                 }
-                """.formatted(StringUtils.sanitize(nameEnvelope));
+                """.formatted(nameEnvelope);
 
         RequestBody body = RequestBody.create(payload.getBytes(), mediaType);
 
@@ -97,11 +96,7 @@ public class ClicksignService {
             }
           }
         }
-    """.formatted(
-                StringUtils.sanitize(signer.name()),
-                signer.email(),
-                StringUtils.sanitize(signer.cpfCnpj())
-        );
+    """.formatted(signer.name(), signer.email(), signer.cpfCnpj());
 
         RequestBody body = RequestBody.create(payload.getBytes(), mediaType);
 
@@ -141,7 +136,7 @@ public class ClicksignService {
           }
         }
     """.formatted(
-                StringUtils.sanitize(fileName),
+                fileName,
                 Base64.getEncoder().encodeToString(pdfBytes)
         );
 
