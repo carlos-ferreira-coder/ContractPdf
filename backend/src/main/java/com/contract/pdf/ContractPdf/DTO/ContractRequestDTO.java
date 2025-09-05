@@ -9,8 +9,7 @@ public record ContractRequestDTO(
         BigDecimal amount,
         @JsonFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
         Integer duration,
-        String city,
-        String uf,
+        String cityUf,
         String description
 ) {
 }

@@ -1,6 +1,5 @@
 package com.contract.pdf.ContractPdf.model;
 
-import com.contract.pdf.ContractPdf.DTO.SignerRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 

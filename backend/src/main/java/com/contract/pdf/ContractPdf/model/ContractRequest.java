@@ -1,7 +1,6 @@
 package com.contract.pdf.ContractPdf.model;
 
 import com.contract.pdf.ContractPdf.DTO.ContractRequestRequestDTO;
-import com.contract.pdf.ContractPdf.DTO.SignerRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,8 +30,8 @@ public class ContractRequest {
     private String pdfPath;
 
     public ContractRequest (ContractRequestRequestDTO contractRequestData) {
-        this.createdAt = contractRequestData.createdAt();
-        this.status = contractRequestData.status();
-        this.pdfPath = contractRequestData.pdfPath();
+        this.createdAt = OffsetDateTime.now();
+        this.status = "Initial";
+        this.pdfPath = null;
     }
 }

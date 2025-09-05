@@ -1,7 +1,6 @@
 package com.contract.pdf.ContractPdf.model;
 
 import com.contract.pdf.ContractPdf.DTO.ContractRequestDTO;
-import com.contract.pdf.ContractPdf.DTO.SignerRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,11 +29,8 @@ public class    Contract {
     @Column(name = "duration", nullable = false)
     private Integer duration;
 
-    @Column(name = "city", nullable = false)
-    private String city;
-
-    @Column(name = "uf", nullable = false)
-    private String uf;
+    @Column(name = "cityUf", nullable = false)
+    private String cityUf;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -47,8 +43,7 @@ public class    Contract {
         this.amount = contractData.amount();
         this.startDate = contractData.startDate();
         this.duration = contractData.duration();
-        this.city = contractData.city();
-        this.uf = contractData.uf();
+        this.cityUf = contractData.cityUf();
         this.description = contractData.description();
         this.contractRequest = contractRequestEntity;
     }

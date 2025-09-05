@@ -149,21 +149,11 @@ export const ContractForm = () => {
         />
 
         <TextField
-          label="Cidade"
-          {...register("contract.city")}
-          error={!!errors.contract?.city}
-          helperText={errors.contract?.city?.message}
-          placeholder="Digite a cidade"
-          required
-          fullWidth
-        />
-
-        <TextField
-          label="UF"
-          {...register("contract.uf")}
-          error={!!errors.contract?.uf}
-          helperText={errors.contract?.uf?.message}
-          placeholder="Digite o estado (ex: SP)"
+          label="Cidade/Uf"
+          {...register("contract.cityUf")}
+          error={!!errors.contract?.cityUf}
+          helperText={errors.contract?.cityUf?.message}
+          placeholder="Digite a cidade/uf"
           required
           fullWidth
         />

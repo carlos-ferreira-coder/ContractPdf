@@ -1,17 +1,15 @@
 package com.contract.pdf.ContractPdf.service;
 
-import com.contract.pdf.ContractPdf.DTO.*;
+import com.contract.pdf.ContractPdf.DTO.ContractRequestRequestDTO;
+import com.contract.pdf.ContractPdf.DTO.ContractResponseDTO;
 import com.contract.pdf.ContractPdf.model.*;
 import com.contract.pdf.ContractPdf.repository.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
-public class ContractService {
+public class PostgresService {
     @Autowired
     private PersonRepository personRepository;
 
@@ -24,23 +22,8 @@ public class ContractService {
     @Autowired
     private ContractRequestRepository contractRequestRepository;
 
-    public List<ContractResponseDTO> listContracts() {
-        List<Contract> contracts = contractRepository.findAll();
-        return contracts.stream()
-                .map(contract -> new ContractResponseDTO(
-                        contract.getId(),
-                        contract.getAmount(),
-                        contract.getStartDate(),
-                        contract.getDuration(),
-                        contract.getCity(),
-                        contract.getUf(),
-                        contract.getDescription()
-                ))
-                .toList();
-    }
-
     @Transactional
-    public ContractResponseDTO createContract (CreateContractDTO contractDTO) {
+    public ContractResponseDTO createContract (ContractRequestRequestDTO contractDTO) {
         Person personContractor = new Person(contractDTO.contractor());
         Person personContractee = new Person(contractDTO.contractee());
         personRepository.save(personContractor);
@@ -63,8 +46,7 @@ public class ContractService {
                 contract.getAmount(),
                 contract.getStartDate(),
                 contract.getDuration(),
-                contract.getCity(),
-                contract.getUf(),
+                contract.getCityUf(),
                 contract.getDescription()
         );
     }

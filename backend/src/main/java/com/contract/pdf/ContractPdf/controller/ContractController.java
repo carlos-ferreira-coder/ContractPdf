@@ -1,39 +1,48 @@
 package com.contract.pdf.ContractPdf.controller;
 
-import com.contract.pdf.ContractPdf.DTO.ContractRequestDTO;
+import com.contract.pdf.ContractPdf.DTO.ContractRequestRequestDTO;
 import com.contract.pdf.ContractPdf.DTO.ContractResponseDTO;
-import com.contract.pdf.ContractPdf.DTO.CreateContractDTO;
-import com.contract.pdf.ContractPdf.model.*;
-import com.contract.pdf.ContractPdf.service.ContractService;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
+import com.contract.pdf.ContractPdf.service.ClicksignService;
+import com.contract.pdf.ContractPdf.service.ItextService;
+import com.contract.pdf.ContractPdf.service.PostgresService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
 @RestController
-@RequestMapping("contract")
 public class ContractController {
 
-    private final ContractService contractService;
+    private final PostgresService postgresService;
+    private final ItextService itextService;
+    private final ClicksignService clicksignService;
 
-    public ContractController (ContractService contractService) {
-        this.contractService = contractService;
+    public ContractController(
+            PostgresService postgresService,
+            ItextService itextService,
+            ClicksignService clicksignService) {
+        this.postgresService = postgresService;
+        this.itextService = itextService;
+        this.clicksignService = clicksignService;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    @PostMapping("/create")
     @Transactional
-    public ResponseEntity<ContractResponseDTO> create (@RequestBody CreateContractDTO dto) {
-        ContractResponseDTO response = contractService.createContract(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    }
+    @PostMapping("/contract/create")
+    public ResponseEntity<ContractResponseDTO> createEnvelope(@RequestBody ContractRequestRequestDTO dto) throws Exception {
+        // Clicksign
+        String nameEnvelope = "Contrato - " + dto.contractor().name();
+        String envelopeId = clicksignService.createEnvelope(nameEnvelope);
 
-    @GetMapping
-    public ResponseEntity<List<ContractResponseDTO>> listAll() {
-        List<ContractResponseDTO> response = contractService.listContracts();
-        return ResponseEntity.ok(response);
+        String signerContractorId = clicksignService.addSigner(envelopeId, dto.contractor());
+        String signerContracteeId = clicksignService.addSigner(envelopeId, dto.contractee());
+
+        String fileName = "Contrato_" + dto.contractor().name().replaceAll("\\s+", "_") + ".pdf";
+        byte[] pdfBytes = itextService.generatePdf(dto.contractor(), dto.contractee(), dto.contract());
+        String documentId = clicksignService.addDocument(envelopeId, pdfBytes, fileName);
+
+        // Postgres
+        ContractResponseDTO response = postgresService.createContract(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

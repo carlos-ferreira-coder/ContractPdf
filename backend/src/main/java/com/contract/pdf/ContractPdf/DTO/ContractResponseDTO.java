@@ -11,8 +11,7 @@ public record ContractResponseDTO(
         BigDecimal amount,
         LocalDate startDate,
         Integer duration,
-        String city,
-        String uf,
+        String cityUf,
         String description
 ) {
     public ContractResponseDTO (Contract contract) {
@@ -21,8 +20,7 @@ public record ContractResponseDTO(
                 contract.getAmount(),
                 contract.getStartDate(),
                 contract.getDuration(),
-                contract.getCity(),
-                contract.getUf(),
+                contract.getCityUf(),
                 contract.getDescription()
         );
     }
