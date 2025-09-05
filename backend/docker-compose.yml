@@ -1,0 +1,12 @@
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: contract_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password

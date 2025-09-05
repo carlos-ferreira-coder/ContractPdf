@@ -16,7 +16,7 @@ CREATE TABLE contract (
     start_date DATE NOT NULL,
     duration INT NOT NULL,
     city VARCHAR(100) NOT NULL,
-    state VARCHAR(2) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
     description TEXT NOT NULL,
     contract_request_id UUID NOT NULL,
     CONSTRAINT fk_contract_request FOREIGN KEY (contract_request_id)

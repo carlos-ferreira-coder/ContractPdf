@@ -29,8 +29,8 @@ public class Signer {
     @JoinColumn(name = "contract_request_id", nullable = false, foreignKey = @ForeignKey(name = "fk_contract_request"))
     private ContractRequest contractRequest;
 
-    public Signer (SignerRequestDTO signerData, Person personEntity, ContractRequest contractRequestEntity) {
-        this.type = signerData.type();
+    public Signer (SignerType type, Person personEntity, ContractRequest contractRequestEntity) {
+        this.type = type;
         this.person = personEntity;
         this.contractRequest = contractRequestEntity;
     }
