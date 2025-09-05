@@ -3,6 +3,8 @@
 import { ContractForm } from "@/components/contractForm";
 import { styled } from "styled-components";
 import styles from "./page.module.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const DivContainer = styled.div`
   display: "flex";
@@ -21,6 +23,17 @@ export default function Home() {
         <DivContainer>
           <ContractForm />
         </DivContainer>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </main>
     </div>
   );

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api as axios, handleAxiosError } from "../app/services/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
 export const ContractForm = () => {
   const schema = contractCreateSchema;
@@ -19,15 +20,13 @@ export const ContractForm = () => {
 
   const onSubmit = async (data: SchemaProps) => {
     try {
-      console.log(data);
-
-      const response = await axios.post("/contract/create", data, {
+      await axios.post("/contract/create", data, {
         withCredentials: true,
       });
 
-      console.log(response.data.message);
+      toast.success("Contrato criado com sucesso!");
     } catch (error) {
-      console.log(handleAxiosError(error));
+      toast.error(handleAxiosError(error));
     }
   };
 
